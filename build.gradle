@@ -24,17 +24,23 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+// Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'org.springframework.security:spring-security-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // HTTP Client
+    implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.3.1'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+
+    // Actuator
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // valid
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 tasks.named('test') {
