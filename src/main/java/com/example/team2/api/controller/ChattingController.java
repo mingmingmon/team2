@@ -38,14 +38,14 @@ public class ChattingController {
     @PostMapping("")
     public Map<String, String> askQuestion(@RequestBody ChatRequestDto request) {
         try {
-            // 외부 API 호출하여 응답 받기
+
             Map<String, Object> output = chattingService.query(Collections.singletonMap("question", request.getQuestion()));
 
-            // 'text' 키 확인
+
             if (output.containsKey("text")) {
                 String apiResponseText = (String) output.get("text");
 
-                // 정규표현식을 사용하여 "API 응답:" 이후 텍스트 전체 추출
+
                 Pattern pattern = Pattern.compile("API 응답:\\s*(.*)", Pattern.DOTALL);
                 Matcher matcher = pattern.matcher("API 응답: " + apiResponseText);
 
@@ -59,7 +59,7 @@ public class ChattingController {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "API 응답에 'text' 키가 없습니다.");
             }
         } catch (ResponseStatusException e) {
-            throw e; // 이미 처리된 예외 재발생
+            throw e;
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error: " + e.getMessage());
         }
